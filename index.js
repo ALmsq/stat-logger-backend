@@ -4,6 +4,16 @@ import bodyparser from 'body-parser'
 import cors from 'cors'
 import routes from './routes/postRoutes'
 
+import session from 'express-session'
+import connectMongo from 'connect-mongo'
+
+// import passport from './controllers/authController'
+// import auth from './routes/authRoutes'
+const passport = require('./controllers/authController')
+const auth = require('./routes/authRoutes')
+
+const MongoStore = connectMongo(session)
+
 const app = express()
 const PORT = 4000
 
@@ -25,10 +35,29 @@ mongoose.connect('mongodb://localhost/postsDB', {
 })
 
 //bodyparser setup
-app.use(bodyparser.urlencoded({ extended: true }))
+app.use(bodyparser.urlencoded({ extended: false }))
 app.use(bodyparser.json())
 
 //cors setup
 app.use(cors())
 
 routes(app)
+/////////////////////////////
+
+//session
+
+app.use(
+    session({
+        secret: 'super secret',
+        resave: false,
+        saveUninitialized: true,
+        store: new MongoStore({ mongooseConnection: mongoose.connection })
+    })
+)
+
+//passport middleware
+
+app.use(passport.initialize())
+app.use(passport.session())
+
+app.use('/api/auth', auth)
