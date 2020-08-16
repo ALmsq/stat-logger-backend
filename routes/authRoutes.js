@@ -1,6 +1,15 @@
 const express = require('express')
 const router = express.Router()
 const passport = require('passport')
+import mongoose from 'mongoose'
+import { UserSchema } from '../models/users'
+import connectEnsureLogin from 'connect-ensure-login'
+import cors from 'cors'
+
+router.use(cors())
+
+
+const User = mongoose.model('users', UserSchema)
 
 router.post('/register_login', (req, res, next) =>{
     passport.authenticate('local', function(err, user, info) {
@@ -26,6 +35,16 @@ router.post('/logout', function(req, res){
     })
 })
 
+router.get('/user', (req, res) => {
+    res.send({user: req.user})
+    console.log(req.session)
+});
+
+router.get('/test', (req, res) =>{
+    res.send({yo: 'yo'})
+})
+
+
 // export const getPost = (req, res) => {
     
 //     Post.find({},(err, Post) => {
@@ -35,6 +54,15 @@ router.post('/logout', function(req, res){
 //         res.json(Post)
 //     })
 // }
+
+// router.get('/user', (req, res, next) =>{
+//     User.find({}, (err, User) =>{
+//         if(err){
+//             res.send(err)
+//         }
+//         res.json(User)
+//     })
+// })
 
 // router.get('/users', 
 //     passport.authenticate('local', {session: false}),
@@ -48,18 +76,20 @@ router.post('/logout', function(req, res){
     
 // })
 
-router.get('/users', (req, res, next) => {
-    passport.authenticate('local', { session: false }, (err, user, info) => {
-        if(err){
-            res.send(err)
-        }
-        if(!user){
-            res.send(res.status(400).json({ message: 'no user found' }))
-        }
-        res.json({ id: req.user.id, username: req.user.username })
-        console.log(user)
-    })(req, res, next)
-})
+// router.get('/users', (req, res, next) => {
+//     passport.authenticate('local', { session: false }, (err, user, info) => {
+//         if(err){
+//             res.send(err)
+//         }
+//         if(!user){
+//             res.send(res.status(400).json({ message: 'no user found' }))
+//             console.log(JSON.stringify(res.user))
+//         }
+//         res.json({ id: req.user.id, username: req.user.username })
+
+        
+//     })(req, res, next)
+// })
 
 
 module.exports = router

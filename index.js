@@ -9,13 +9,23 @@ import connectMongo from 'connect-mongo'
 
 // import passport from './controllers/authController'
 // import auth from './routes/authRoutes'
-const passport = require('./controllers/authController')
-const auth = require('./routes/authRoutes')
+// const passport = require('./controllers/authController')
+// const auth = require('./routes/authRoutes')
+
+const passport = require('passport')
+const users = require('./routes/userRoutes')
+
 
 const MongoStore = connectMongo(session)
 
 const app = express()
 const PORT = 4000
+
+
+
+//cors setup
+app.use(cors())
+app.options('*', cors())
 
 app.get('/', (req, res) =>
     res.send(`server running on ${PORT}`)
@@ -38,8 +48,9 @@ mongoose.connect('mongodb://localhost/postsDB', {
 app.use(bodyparser.urlencoded({ extended: false }))
 app.use(bodyparser.json())
 
-//cors setup
-app.use(cors())
+
+
+
 
 routes(app)
 /////////////////////////////
@@ -60,4 +71,14 @@ app.use(
 app.use(passport.initialize())
 app.use(passport.session())
 
-app.use('/api/auth', auth)
+//passport config
+require('./config/passport')(passport)
+
+//routes
+app.use('/users', users)
+
+// app.use('/api/auth/', auth)
+
+// app.get('/api/auth/', (req, res) =>{
+//     res.send('auth')
+// })
