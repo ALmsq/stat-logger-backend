@@ -1,4 +1,5 @@
 import mongoose from 'mongoose'
+import dayjs from 'dayjs'
 
 const Schema = mongoose.Schema
 
@@ -19,6 +20,10 @@ export const PostSchema = new Schema({
     dislike: {
         type: Number,
         default: 0
+    },
+    date: {
+        type: Date,
+        default: Date
     }
 })
 

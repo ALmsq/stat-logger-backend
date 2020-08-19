@@ -57,19 +57,19 @@ routes(app)
 
 //session
 
-app.use(
-    session({
-        secret: 'super secret',
-        resave: false,
-        saveUninitialized: true,
-        store: new MongoStore({ mongooseConnection: mongoose.connection })
-    })
-)
+// app.use(
+//     session({
+//         secret: 'super secret',
+//         resave: false,
+//         saveUninitialized: true,
+//         store: new MongoStore({ mongooseConnection: mongoose.connection })
+//     })
+// )
 
 //passport middleware
 
 app.use(passport.initialize())
-app.use(passport.session())
+// app.use(passport.session())
 
 //passport config
 require('./config/passport')(passport)
