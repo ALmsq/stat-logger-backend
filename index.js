@@ -37,8 +37,11 @@ app.listen(PORT, () => {
 
 //mongoose connection
 
+const URI = 'mongodb+srv://alex:5626373@heroku.pzclj.mongodb.net/StatTrackerBackend?retryWrites=true&w=majority'
+
 mongoose.Promise = global.Promise
-mongoose.connect('mongodb://localhost/postsDB', {
+// mongoose.connect('mongodb://localhost/postsDB', {
+mongoose.connect(URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useFindAndModify: false
