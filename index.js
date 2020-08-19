@@ -6,6 +6,8 @@ import routes from './routes/postRoutes'
 
 import session from 'express-session'
 import connectMongo from 'connect-mongo'
+const dotenv = require('dotenv');
+dotenv.config();
 
 // import passport from './controllers/authController'
 // import auth from './routes/authRoutes'
@@ -37,8 +39,8 @@ app.listen(PORT, () => {
 
 //mongoose connection
 
-const URI = 'mongodb+srv://alex:5626373@heroku.pzclj.mongodb.net/StatTrackerBackend?retryWrites=true&w=majority'
-
+const URI = process.env.URI
+console.log(process.env.URI)
 mongoose.Promise = global.Promise
 // mongoose.connect('mongodb://localhost/postsDB', {
 mongoose.connect(URI, {
