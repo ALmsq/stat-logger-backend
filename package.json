@@ -8,6 +8,7 @@
     "node": "14.4.0"
   },
   "scripts": {
+    "build": "babel lib -d dist",
     "server": "nodemon index.js --exec babel-node",
     "heroku-postbuild": "npm install",
     "start": "babel-node index.js"
