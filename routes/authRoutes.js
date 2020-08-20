@@ -2,7 +2,7 @@ const express = require('express')
 const router = express.Router()
 const passport = require('passport')
 import mongoose from 'mongoose'
-import { UserSchema } from '../models/users'
+import { UserSchema } from '../models/Users'
 import connectEnsureLogin from 'connect-ensure-login'
 import cors from 'cors'
 

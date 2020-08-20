@@ -1,7 +1,7 @@
 import mongoose from 'mongoose'
 const bcrypt = require('bcryptjs')
 // const User = require('../models/Users')
-import { UserSchema } from '../models/users'
+import { UserSchema } from '../models/Users'
 const passport = require('passport')
 const LocalStrategy = require('passport-local').Strategy
 
