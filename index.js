@@ -39,7 +39,7 @@ app.listen(PORT, () => {
 
 //mongoose connection
 
-const URI = process.env.URI
+const URI = process.env.MONGODB_URI || process.env.URI 
 
 mongoose.Promise = global.Promise
 // mongoose.connect('mongodb://localhost/postsDB', {
