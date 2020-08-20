@@ -4,8 +4,11 @@
   "description": "",
   "main": "index.js",
   "proxy": "http://localhost:4000",
+  "engines": {
+    "node": "14.4.0"
+  },
   "scripts": {
-    "server": "nodemon --exec babel-node index.js", 
+    "server": "nodemon index.js --exec babel-node", 
     "heroku-postbuild": "npm install",
     "start": "babel-node index.js"
   },
