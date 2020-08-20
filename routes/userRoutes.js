@@ -3,7 +3,7 @@ const router = express.Router();
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const mongoose = require('mongoose')
-import { UserSchema } from '/models/users'
+import { UserSchema } from '../models/users'
 const keys = require("../config/keys");
 // Load input validation
 const validateRegisterInput = require("../controllers/register");

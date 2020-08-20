@@ -1,1 +1,2 @@
 web: npm start
+worker: node ./node_modules/.bin/pm2 start worker.json --attach

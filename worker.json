@@ -1,0 +1,4 @@
+{
+    "name": "worker",
+    "script": "/app/lib/worker.js"
+  }
